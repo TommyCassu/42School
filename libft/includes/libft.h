@@ -1,6 +1,10 @@
 #ifndef LIBFT_H
 # define LIBFT_H
 
+#include <string.h>
+#include <stdlib.h>
+#include <unistd.h>
+
 int ft_atoi(char *str);
 int ft_strcmp(char *s1, char *s2);
 int ft_strncmp(char *s1, char *s2, int n);

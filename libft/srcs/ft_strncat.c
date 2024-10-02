@@ -1,21 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*   ft_strncat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/02 20:51:09 by marvin            #+#    #+#             */
-/*   Updated: 2024/10/02 20:51:09 by marvin           ###   ########.fr       */
+/*   Created: 2024/10/02 21:04:31 by marvin            #+#    #+#             */
+/*   Updated: 2024/10/02 21:04:31 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int ft_strncmp(char *s1, char *s2, size_t n)
+char    *ft_strncat(char *dest, char *src, size_t n)
 {
     int i;
+    int j;
 
     i = 0;
-    while (s1[i] != '\0' && s1[i] == s2[i] && i < (n - 1))
+    j = 0;
+    while (dest[i] != '\0')
         i++;
-    return (s1 - s2);
+    while (src[j] != '\0' && i < (n - 1))
+    {
+        dest[i] = src[j];
+        i++;
+        j++;
+    }
+    dest[i] = '\0';
+    return (dest);
 }
