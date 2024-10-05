@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strncat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: toto <toto@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 21:04:31 by marvin            #+#    #+#             */
-/*   Updated: 2024/10/02 21:04:31 by marvin           ###   ########.fr       */
+/*   Updated: 2024/10/05 12:26:39 by toto             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 char    *ft_strncat(char *dest, char *src, size_t n)
 {
-    int i;
-    int j;
+    size_t i;
+    size_t j;
 
     i = 0;
     j = 0;

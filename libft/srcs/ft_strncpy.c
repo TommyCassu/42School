@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strncpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: toto <toto@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 21:03:30 by marvin            #+#    #+#             */
-/*   Updated: 2024/10/02 21:03:30 by marvin           ###   ########.fr       */
+/*   Updated: 2024/10/05 12:27:02 by toto             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char    *ft_strncpy(char *dest, char *src, t_size n)
+char    *ft_strncpy(char *dest, char *src, size_t n)
 {
-    int i;
+    size_t i;
 
     i = 0;
     while (src[i] != '\0' && i < n - 1)
