@@ -217,14 +217,42 @@ void test_ft_strlen()
 
 int main()
 {
-    printf("Testing ft_strlen:\n");
-    test_ft_strlen();
-    
-    printf("\nTesting ft_atoi:\n");
-    test_ft_atoi();
-    
-    // Ajoutez d'autres tests ici
-    
+    printf("Starting libft tests:\n\n");
+
+    test_ft_isdigit();
+    printf("\n");
+
+    test_ft_isprint();
+    printf("\n");
+
+    test_ft_memchr();
+    printf("\n");
+
+    test_ft_memcmp();
+    printf("\n");
+
+    test_ft_strcat();
+    printf("\n");
+
+    test_ft_strchr();
+    printf("\n");
+
+    test_ft_strcmp();
+    printf("\n");
+
+    test_ft_strcpy();
+    printf("\n");
+
+    test_ft_strdup();
+    printf("\n");
+
+    test_ft_strlcat();
+    printf("\n");
+
+    // Ajoutez ici d'autres appels aux fonctions de test que vous avez créées
+
+    printf("All tests completed.\n");
+
     return 0;
 }
     /* ft_bzero */
