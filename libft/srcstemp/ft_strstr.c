@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: toto <toto@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 23:58:50 by marvin            #+#    #+#             */
-/*   Updated: 2024/10/04 23:58:50 by marvin           ###   ########.fr       */
+/*   Updated: 2024/10/07 18:32:50 by toto             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,8 @@ int	ft_strlen(char *str)
 char	*ft_strstr(char *str, char *to_find)
 {
 	int		j;
-	int		i;
 	char	*temp;
 
-	i = 0;
 	j = 0;
 	temp = str;
 	if (ft_strlen(str) < ft_strlen(to_find))

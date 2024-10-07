@@ -1,12 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.c                                            :+:      :+:    :+:   */
+/*   testlibft.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: toto <toto@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 20:00:29 by marvin            #+#    #+#             */
-/*   Updated: 2024/10/02 20:00:29 by marvin           ###   ########.fr       */
+/*   Updated: 2024/10/07 20:45:01 by toto             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
+#include "includes/libft.h"
+
+int main()
+{
+    char str[] = "toto va a la plage";
+    
+    printf("len %d", ft_strlen(str));
+}

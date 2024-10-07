@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: toto <toto@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 20:26:49 by marvin            #+#    #+#             */
-/*   Updated: 2024/10/02 20:26:49 by marvin           ###   ########.fr       */
+/*   Updated: 2024/10/07 17:56:23 by toto             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int ft_atoi(char *str)
         countsign++;
         if (countsign > 1)
             return (0);
-        if  (str[i] = '-')
+        if  (str[i] == '-')
             sign = -1;
         i++;
     }
