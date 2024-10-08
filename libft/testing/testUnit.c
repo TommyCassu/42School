@@ -15,7 +15,7 @@
 void test(int condition, const char *message)
 {
     if (condition)
-        printf("OK : %s\n", message);
+        printf("OK\n");
     else
         printf("KO : %s\n", message);
 }
