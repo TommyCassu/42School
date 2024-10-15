@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_tolower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: toto <toto@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 20:42:27 by marvin            #+#    #+#             */
-/*   Updated: 2024/10/02 20:42:27 by marvin           ###   ########.fr       */
+/*   Updated: 2024/10/14 23:48:28 by toto             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int tolower(int c)
+int ft_tolower(int c)
 {
     if  (c >= 65 && c <= 90)
         c += 32;

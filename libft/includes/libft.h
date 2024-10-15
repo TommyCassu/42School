@@ -6,8 +6,8 @@
 
 /* Basics functions */
 int ft_atoi(char *str);
-int tolower(int c);
-int toupper(int c);
+int ft_tolower(int c);
+int ft_toupper(int c);
 int ft_isalnum(int c);
 int ft_isalpha(int c);
 int ft_isascii(int c);

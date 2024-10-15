@@ -6,13 +6,13 @@
 /*   By: toto <toto@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 23:25:46 by marvin            #+#    #+#             */
-/*   Updated: 2024/10/07 18:32:16 by toto             ###   ########.fr       */
+/*   Updated: 2024/10/14 23:29:39 by toto             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <string.h>
-
+#include <stdbool.h>
 size_t  ft_strlcat(char *dst, const char *src, size_t dstsize)
 {
     size_t i;
@@ -26,8 +26,6 @@ size_t  ft_strlcat(char *dst, const char *src, size_t dstsize)
         i++;
     while (src[j] != '\0')
         j++;
-    if (dstsize <= i + j)
-        return (i + j);
     while (src[k] != '\0' && i + k + 1 < dstsize)
     {
         dst[i + k] = src[k];
