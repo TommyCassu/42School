@@ -6,7 +6,7 @@
 /*   By: tcassu <tcassu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 20:26:49 by marvin            #+#    #+#             */
-/*   Updated: 2024/11/04 21:58:35 by tcassu           ###   ########.fr       */
+/*   Updated: 2024/11/05 14:31:28 by tcassu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	ft_atoi(char *str)
 	int	result;
 
 	i = 0;
-	sign = 0;
+	sign = 1;
 	result = 0;
 	while ((str[i] >= 9 && str[i] <= 13) || str[i] == 32)
 		i++;
@@ -31,8 +31,10 @@ int	ft_atoi(char *str)
 	}
 	while (str[i] >= '0' && str[i] <= '9')
 	{
-		result = result * 10 + (str[i] - '0');
+		result = (result * 10) + (str[i] - '0');
 		i++;
 	}
 	return (result * sign);
 }
+
+
