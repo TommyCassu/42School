@@ -1,29 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrchr.c                                       :+:      :+:    :+:   */
+/*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tcassu <tcassu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/31 01:43:51 by toto              #+#    #+#             */
-/*   Updated: 2024/11/04 19:49:18 by tcassu           ###   ########.fr       */
+/*   Created: 2024/11/04 21:32:22 by tcassu            #+#    #+#             */
+/*   Updated: 2024/11/04 21:35:11 by tcassu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+#include <stdlib.h>
+#include "includes/libft.h"
 
-char	*ft_strrchr(const char *s, int c)
+int main()
 {
-	int	i;
-
-	i = ft_strlen(s);
-	if ((char)c == '\0')
-		return ((char *)s + i);
-	while (s[i] != c)
-	{
-		if (i == 0)
-			return (NULL);
-		i--;
-	}
-	return ((char *)s + i);
+	printf("%d", ft_isdigit('0'));
 }
