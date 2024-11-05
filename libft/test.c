@@ -6,11 +6,14 @@
 /*   By: tcassu <tcassu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 21:32:22 by tcassu            #+#    #+#             */
-/*   Updated: 2024/11/05 14:27:09 by tcassu           ###   ########.fr       */
+/*   Updated: 2024/11/05 15:54:03 by tcassu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+#include <stdlib.h>
 #include "includes/libft.h"
 
 #define OK "\033[0;32mOK\033[0m"
@@ -199,6 +202,21 @@ void test_ft_memcmp()
     printf("  Test 4: %s\n", (ft_memcmp("", "", 0) == memcmp("", "", 0)) ? OK : KO);
 }
 
+void test_ft_strnstr()
+{
+    const char r1[20] = "Hello, World!";
+	const char r2[20] = "o";
+	const char r3[20] = "ell";
+	const char r4[20] = "d!";
+	const char r5[20] = "";
+
+	printf("ft_strnstr:\n");
+    printf("  Test 1: %s\n", (ft_memcmp(ft_strnstr(r1, r2, ft_strlen(r1)), "o, World!", 10) == 0 )? OK : KO);
+	printf("  Test 2: %s\n", (ft_memcmp(ft_strnstr(r1, r3, ft_strlen(r1)), "ello, World!", 13) == 0 )? OK : KO);
+	printf("  Test 3: %s\n", (ft_memcmp(ft_strnstr(r1, r4, ft_strlen(r1)), "d!", 3) == 0 )? OK : KO);
+	printf("  Test 4: %s\n", (ft_memcmp(ft_strnstr(r1, r5, ft_strlen(r1)), "Hello, World!", 14) == 0 )? OK : KO);
+}
+
 void test_ft_atoi()
 {
 	char	test1[] = " -123abc";
@@ -212,6 +230,22 @@ void test_ft_atoi()
 	printf("  Test 3 %s\n", (ft_atoi(test3) == atoi(test3)) ? OK : KO);
 	printf("  Test 4 %s\n", (ft_atoi(test4) == atoi(test4)) ? OK : KO);
 }
+
+void test_ft_strdup()
+{
+	char	test1[] = "to";
+	char	test2[] = "1231!@#4932 324wrswer";
+	char	test3[] = "'[];{}]][123waqwe]]'";
+	char	test4[] = "";
+	
+    printf("ft_strdup:\n");
+    
+	printf("  Test 1 %s\n", (ft_memcmp(ft_strdup(test1), strdup(test1), 3) == 0) ? OK : KO);
+	printf("  Test 2 %s\n", (ft_memcmp(ft_strdup(test2), strdup(test2), 23) == 0) ? OK : KO);
+	printf("  Test 3 %s\n", (ft_memcmp(ft_strdup(test3), strdup(test3), 22) == 0) ? OK : KO);
+	printf("  Test 4 %s\n", (ft_memcmp(ft_strdup(test4), strdup(test4), 2) == 0) ? OK : KO);
+}
+
 int main()
 {
 	test_ft_isalpha();
@@ -233,10 +267,10 @@ int main()
 	test_ft_strncmp();
 	test_ft_memchr();
 	test_ft_memcmp();
-	//test_ft_strnstr();
+	test_ft_strnstr();
 	test_ft_atoi();
 	
 	//test_ft_calloc();
-	//test_ft_strdup();
+	test_ft_strdup();
 	
 }
