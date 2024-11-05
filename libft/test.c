@@ -6,7 +6,7 @@
 /*   By: tcassu <tcassu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 21:32:22 by tcassu            #+#    #+#             */
-/*   Updated: 2024/11/05 12:34:19 by tcassu           ###   ########.fr       */
+/*   Updated: 2024/11/05 13:33:07 by tcassu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,4 +75,5 @@ int main()
 	test_ft_isalnum();
 	test_ft_isascii();
 	test_ft_isprint();
+	//toto
 }
