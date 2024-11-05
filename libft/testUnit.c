@@ -7,6 +7,7 @@
 #define OK "\033[0;32mOK\033[0m"
 #define KO "\033[0;31mKO\033[0m"
 
+
 void test_ft_atoi()
 {
     char *tests[] = {" -123abc", "2147483647", "-2147483648", "   +42"};
