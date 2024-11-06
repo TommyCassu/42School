@@ -1,41 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   ft_lstiter_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tcassu <tcassu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/05 11:15:22 by tcassu            #+#    #+#             */
-/*   Updated: 2024/11/05 11:33:14 by tcassu           ###   ########.fr       */
+/*   Created: 2024/11/06 15:41:20 by tcassu            #+#    #+#             */
+/*   Updated: 2024/11/06 17:04:18 by tcassu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list	*ft_lstnew(void *content)
+void	ft_lstiter(t_list *lst, void (*f)(void *))
 {
-	t_list	*list;
-
-	list = malloc(sizeof(t_list));
-	if (!list)
-		return (NULL);
-	list->context = content;
-	list->next = NULL;
-	return (list);
-}
-/*
-void	afficherListe(t_list *liste){
-	t_list *tmp = liste;
-	while(tmp != NULL)
+	if (!lst)
+		return ;
+	while (lst)
 	{
-		printf("%s\n ", (char *)tmp->context);
-		tmp = tmp->next;
+		f(lst->context);
+		lst = lst->next;
 	}
 }
-
-int main(void)
-{
-	char	str[] = "toto";
-	afficherListe(ft_lstnew(str));
-}
-*/

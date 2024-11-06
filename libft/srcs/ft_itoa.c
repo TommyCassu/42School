@@ -6,7 +6,7 @@
 /*   By: tcassu <tcassu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 21:24:38 by toto              #+#    #+#             */
-/*   Updated: 2024/11/04 22:02:47 by tcassu           ###   ########.fr       */
+/*   Updated: 2024/11/06 15:32:28 by tcassu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,9 @@ char	*ft_itoa(int nb)
 		nbr /= 10;
 		nbdigit--;
 	}
-	return (result);  
+	return (result);
 }
+
 /*
 include <stdio.h>
 #include <string.h>
