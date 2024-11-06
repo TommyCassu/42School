@@ -1,36 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memove.c                                        :+:      :+:    :+:   */
+/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: toto <toto@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/02 12:51:52 by toto              #+#    #+#             */
-/*   Updated: 2024/11/03 19:48:33 by toto             ###   ########.fr       */
+/*   Created: 2024/11/06 13:22:32 by toto              #+#    #+#             */
+/*   Updated: 2024/11/06 13:30:38 by toto             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "libft.h"
-#include <stdio.h>
+#include "libft.h"
 
-void    ft_memmove(void *dest, const void *src, size_t n)
+void    ft_lstdelone(t_list *lst, void (*del)(void*))
 {
-    char    *tempdest;
-    char    *tempsrc;
-    
-    tempsrc = (char *)src;
-    tempdest = (char *)dest;
-    while (n >= 0)
+    if (lst)
     {
-        tempdest[n] = tempsrc[n];
-        n--;
+        del(lst->context);
+        free(lst);
     }
-    printf("%s", tempdest); 
-}
-int main()
-{
-    char t[] = "toto";
-    char g[] = "kiti";
-
-    ft_memmove(t, g, 4);
 }

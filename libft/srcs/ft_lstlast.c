@@ -1,36 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memove.c                                        :+:      :+:    :+:   */
+/*   ft_lstlast.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: toto <toto@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/02 12:51:52 by toto              #+#    #+#             */
-/*   Updated: 2024/11/03 19:48:33 by toto             ###   ########.fr       */
+/*   Created: 2024/11/06 12:57:13 by toto              #+#    #+#             */
+/*   Updated: 2024/11/06 13:02:16 by toto             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "libft.h"
-#include <stdio.h>
+#include "libft.h"
 
-void    ft_memmove(void *dest, const void *src, size_t n)
+t_list  *ft_lstlast(t_list *lst)
 {
-    char    *tempdest;
-    char    *tempsrc;
-    
-    tempsrc = (char *)src;
-    tempdest = (char *)dest;
-    while (n >= 0)
-    {
-        tempdest[n] = tempsrc[n];
-        n--;
-    }
-    printf("%s", tempdest); 
+    if (!lst)
+        return (NULL);
+    while (lst->next != NULL)
+        lst = lst->next;
+    return (lst);
 }
-int main()
-{
-    char t[] = "toto";
-    char g[] = "kiti";
 
-    ft_memmove(t, g, 4);
-}
