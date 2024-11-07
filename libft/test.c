@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcassu <tcassu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: toto <toto@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 21:32:22 by tcassu            #+#    #+#             */
-/*   Updated: 2024/11/06 17:43:45 by tcassu           ###   ########.fr       */
+/*   Updated: 2024/11/07 01:20:21 by toto             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -246,6 +246,133 @@ void test_ft_strdup()
 	printf(" [%s]", (ft_memcmp(ft_strdup(test4), strdup(test4), 2) == 0) ? OK : KO);
 }
 
+void test_ft_itoa()
+{
+	int	str = -2147483648;
+	int	str1 = 2147483647;
+	int	str2 = 0;
+	int	str3 = 42;
+	
+    printf("\nft_itoa:   ");
+    
+	printf(" [%s]", (ft_memcmp(ft_itoa(str), "-2147483648", 11) == 0) ? OK : KO);
+	printf(" [%s]", (ft_memcmp(ft_itoa(str1), "2147483647", 10) == 0) ? OK : KO);
+	printf(" [%s]", (ft_memcmp(ft_itoa(str2), "0", 1) == 0) ? OK : KO);
+	printf(" [%s]", (ft_memcmp(ft_itoa(str3), "42", 2) == 0) ? OK : KO);
+}
+
+void test_ft_strtrim()
+{
+	char	test1[] = "abcdefghij";
+	char	test2[] = "    abcde     ";
+	char	test3[] = "               ";
+	char	test4[] = "";
+	
+    printf("\nft_strtrim:");
+    
+	printf(" [%s]", (ft_memcmp(ft_strtrim(test1, "aj"), "bcdefghi", 9) == 0) ? OK : KO);
+	printf(" [%s]", (ft_memcmp(ft_strtrim(test2, " "), "abcde", 6) == 0) ? OK : KO);
+	printf(" [%s]", (ft_memcmp(ft_strtrim(test3, " "), "", 1) == 0) ? OK : KO);
+	printf(" [%s]", (ft_memcmp(ft_strtrim(test4, ""), "", 1) == 0) ? OK : KO);
+}
+
+void test_ft_strjoin()
+{
+	char	test1[] = "A ";
+	char	test2[] = "";
+	char	test3[] = "12345678";
+	char	test4[] = "";
+	
+    printf("\nft_strjoin:");
+    
+	printf(" [%s]", (ft_memcmp(ft_strjoin(test1, "cat is not a dog"), "A cat is not a dog", 19) == 0) ? OK : KO);
+	printf(" [%s]", (ft_memcmp(ft_strjoin(test2, "A cat is not a dog"), "A cat is not a dog", 18) == 0) ? OK : KO);
+	printf(" [%s]", (ft_memcmp(ft_strjoin(test3, "12345678"), "1234567812345678", 17) == 0) ? OK : KO);
+	printf(" [%s]", (ft_memcmp(ft_strjoin(test4, ""), "", 1) == 0) ? OK : KO);
+}
+
+void test_ft_substr()
+{
+	char	test1[] = "A cat is not a dog.";
+	
+	
+    printf("\nft_substr: ");
+    
+	printf(" [%s]", (ft_memcmp(ft_substr(test1, 2, 3), "cat", 4) == 0) ? OK : KO);
+	printf(" [%s]", (ft_memcmp(ft_substr(test1, 0, 5), "A cat", 5) == 0) ? OK : KO);
+	printf(" [%s]", (ft_memcmp(ft_substr(test1, 0, ft_strlen(test1)), "A cat is not a dog.", 19) == 0) ? OK : KO);
+	printf(" [%s]", (ft_memcmp(ft_substr(test1, 2, 0), "", 1) == 0) ? OK : KO);
+}
+void test_ft_putendl_fd()
+{
+    
+    
+	ft_putendl_fd("\nft_putendl_fd:   [\033[0;32mOK\033[0m]", 1);
+	
+}
+
+void test_ft_putstr_fd()
+{
+    
+	ft_putstr_fd("ft_putstr_fd:    [\033[0;32mOK\033[0m]", 1);
+	
+}
+
+void test_ft_putchar_fd()
+{
+    
+	char	*str;
+
+	str = "ft_putchar_fd:   [\033[0;32mOK\033[0m]\n";
+	while (*str)
+		ft_putchar_fd(*str++, 2);
+	
+}
+
+char to_upper(unsigned int i, char c)
+{
+    (void)i;
+    if (c >= 'a' && c <= 'z')
+        return c - 32;
+    return c;
+}
+
+void test_ft_strmapi()
+{
+    printf("\nft_strmapi:");
+    
+	char	str[] = "abc";
+
+	printf(" [%s]", (ft_memcmp(ft_strmapi(str, to_upper), "ABC", 4) == 0) ? OK : KO);
+}
+
+void to_upperv(unsigned int i, char *c)
+{
+    (void)i;
+	if (*c >= 'a' && *c <= 'z')
+		*c = *c - 'a' + 'A';
+}
+
+void test_ft_striteri()
+{
+	char	str[] = "abc";
+	char	str1[] = "123abc";
+	char	str2[] = "!@#$abc";
+	char	str3[] = ";./,abc";
+	
+    printf("\nft_striteri:");
+    
+	ft_striteri(str, to_upperv);
+	ft_striteri(str1, to_upperv);
+	ft_striteri(str2, to_upperv);
+	ft_striteri(str3, to_upperv);
+
+	printf("[%s] ", (ft_memcmp(str, "ABC", 4) == 0) ? OK : KO);
+	printf("[%s] ", (ft_memcmp(str1, "123ABC", 7) == 0) ? OK : KO);
+	printf("[%s] ", (ft_memcmp(str2, "!@#$ABC", 8) == 0) ? OK : KO);
+	printf("[%s] ", (ft_memcmp(str3, ";./,ABC", 8) == 0) ? OK : KO);
+}
+
 int main()
 {
 	test_ft_isalpha();
@@ -273,16 +400,16 @@ int main()
 	//test_ft_calloc();
 	test_ft_strdup();
 	
-	//test_ft_substr();
-	//test_ft_strjoin();
-	//test_ft_strtrim();
+	test_ft_substr();
+	test_ft_strjoin();
+	test_ft_strtrim();
 	//test_ft_split();
-	//test_ft_itoa();
-	//test_ft_strmapi();
-	//test_ft_strteri();
-	//test_ft_putchar_fd();
-	//test_ft_putstr_fd();
-	//test_ft_putendl_fd();
+	test_ft_itoa();
+	test_ft_strmapi();
+	test_ft_striteri();
+	test_ft_putchar_fd();
+	test_ft_putstr_fd();
+	test_ft_putendl_fd();
 	//test_ft_putnbr_fd();
 
 	//test_ft_lstnew();
