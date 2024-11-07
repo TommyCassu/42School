@@ -6,7 +6,7 @@
 /*   By: toto <toto@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 21:32:22 by tcassu            #+#    #+#             */
-/*   Updated: 2024/11/07 01:20:21 by toto             ###   ########.fr       */
+/*   Updated: 2024/11/07 20:26:33 by toto             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 #include <string.h>
 #include <ctype.h>
 #include <stdlib.h>
+#include <fcntl.h>
+#include <limits.h>
+#include <unistd.h>
 #include "includes/libft.h"
 
 #define OK "\033[0;32mOK\033[0m"
@@ -104,8 +107,9 @@ void test_ft_bzero()
 {
     char str1[20] = "Hello, World!";
     char str2[20] = "Hello, World!";
-	char empty1[20] = "";
+    char empty1[20] = "";
     char empty2[20] = "";
+
     printf("\nft_bzero:  ");
     
     ft_bzero(str1, 5);
@@ -124,7 +128,70 @@ void test_ft_bzero()
     bzero(str2, 20);
     printf(" [%s]", (memcmp(empty1, empty2, 20) == 0) ? OK : KO);
 }
+void test_ft_memcpy()
+{
+    char src[20] = "Hello, World!";
+	char src2[20] = "";
+	char dest[23] = "_____________________";
+	
+	printf("\nft_memcpy: ");
+	
+    printf(" [%s]", (memcmp(ft_memcpy(dest, src, 0), memcpy(dest, src, 0), sizeof(src)) == 0) ? OK : KO);
+	printf(" [%s]", (memcmp(ft_memcpy(dest, src, 2), memcpy(dest, src, 0), sizeof(src)) == 0) ? OK : KO);
+    printf(" [%s]", (memcmp(ft_memcpy(dest, src, strlen(src)), memcpy(dest, src, strlen(src)), sizeof(src)) == 0) ? OK : KO);
+    printf(" [%s]", (memcmp(ft_memcpy(dest, src2, 0), memcpy(dest, src2, 0), sizeof(src)) ==0 )? OK : KO);
+}
 
+void test_ft_strlcat()
+{
+    char dest[20];
+    const char *src = "World!";
+    size_t result;
+
+    printf("\nft_strlcat:");
+
+    // Test 1: Concaténation normale
+    strcpy(dest, "Hello ");
+    result = ft_strlcat(dest, src, sizeof(dest));
+    printf(" [%s]", (result == 12 && strcmp(dest, "Hello World!") == 0) ? OK : KO);
+
+    // Test 2: Destination trop petite
+    strcpy(dest, "Hello ");
+    result = ft_strlcat(dest, src, 10);
+    printf(" [%s]", (result == 12 && strcmp(dest, "Hello Wor") == 0) ? OK : KO);
+
+    // Test 3: Source vide
+    strcpy(dest, "Hello ");
+    result = ft_strlcat(dest, "", sizeof(dest));
+    printf(" [%s]", (result == 6 && strcmp(dest, "Hello ") == 0) ? OK : KO);
+
+    // Test 4: Taille zéro
+    strcpy(dest, "Hello ");
+    result = ft_strlcat(dest, src, 0);
+    printf(" [%s]", (result == 6 && strcmp(dest, "Hello ") == 0) ? OK : KO);
+}
+
+void test_ft_strlcpy()
+{
+    char dest[20];
+    const char *src = "Hello, World!";
+    size_t result;
+
+    printf("\nft_strlcpy:");
+    // Test 1: Copie normale
+    result = ft_strlcpy(dest, src, sizeof(dest));
+    printf(" [%s]", (result == 13 && strcmp(dest, src) == 0) ? OK : KO);
+    // Test 2: Destination trop petite
+    result = ft_strlcpy(dest, src, 7);
+    printf(" [%s]", (result == 13 && strcmp(dest, "Hello,") == 0) ? OK : KO);
+    // Test 3: Taille zéro
+    dest[0] = 'A';
+    result = ft_strlcpy(dest, src, 0);
+    printf(" [%s]", (result == 13 && dest[0] == 'A') ? OK : KO);
+    // Test 4: Source vide
+    result = ft_strlcpy(dest, "", sizeof(dest));
+    printf(" [%s]", (result == 0 && dest[0] == '\0') ? OK : KO);
+}
 void test_ft_toupper()
 {
     printf("\nft_toupper:");
@@ -230,6 +297,46 @@ void test_ft_atoi()
 	printf(" [%s]", (ft_atoi(test3) == atoi(test3)) ? OK : KO);
 	printf(" [%s]", (ft_atoi(test4) == atoi(test4)) ? OK : KO);
 }
+void test_ft_calloc()
+{
+    int *arr;
+    int i, test_ok;
+
+    printf("\nft_calloc: ");
+
+    // Test 1: Allocation normale
+    arr = (int *)ft_calloc(5, sizeof(int));
+    if (arr == NULL)
+    {
+        printf(" [%s]", KO);
+    }
+    else
+    {
+        test_ok = 1;
+        for (i = 0; i < 5; i++)
+        {
+            if (arr[i] != 0)
+            {
+                test_ok = 0;
+                break;
+            }
+        }
+        printf(" [%s]", test_ok ? OK : KO);
+        free(arr);
+    }
+
+    // Test 2: Allocation de taille zéro
+    arr = (int *)ft_calloc(0, sizeof(int));
+    printf(" [%s]", (arr == NULL) ? OK : KO);
+    if (arr != NULL)
+        free(arr);
+
+    // Test 3: Allocation avec nmemb zéro
+    arr = (int *)ft_calloc(5, 0);
+    printf(" [%s]", (arr == NULL) ? OK : KO);
+    if (arr != NULL)
+        free(arr);
+}
 
 void test_ft_strdup()
 {
@@ -328,7 +435,57 @@ void test_ft_putchar_fd()
 		ft_putchar_fd(*str++, 2);
 	
 }
-
+void test_ft_putnbr_fd()
+{
+    int fd;
+    char buffer[100];
+    // Ouvrir un fichier temporaire pour les tests
+    fd = open("test_putnbr.txt", O_WRONLY | O_CREAT | O_TRUNC, 0644);
+    if (fd == -1)
+    {
+        printf("Erreur lors de l'ouverture du fichier de test\n");
+        return;
+    }
+    // Tester différents nombres
+    ft_putnbr_fd(0, fd);
+    write(fd, "\n", 1);
+    ft_putnbr_fd(42, fd);
+    write(fd, "\n", 1);
+    ft_putnbr_fd(-42, fd);
+    write(fd, "\n", 1);
+    ft_putnbr_fd(INT_MAX, fd);
+    write(fd, "\n", 1);
+    ft_putnbr_fd(INT_MIN, fd);
+    write(fd, "\n", 1);
+    // Fermer le fichier
+    close(fd);
+    // Lire le contenu du fichier
+    fd = open("test_putnbr.txt", O_RDONLY);
+    if (fd == -1)
+    {
+        printf("Erreur lors de la lecture du fichier de test\n");
+        return;
+    }
+    ssize_t bytes_read = read(fd, buffer, sizeof(buffer) - 1);
+    if (bytes_read > 0)
+        buffer[bytes_read] = '\0';
+    else
+        printf("Erreur lors de la lecture du fichier ou fichier vide\n");
+    close(fd);
+    // Vérifier le résultat
+    const char *expected = "0\n42\n-42\n2147483647\n-2147483648\n";
+    if (strcmp(buffer, expected) == 0)
+    {
+        printf("\nft_putnbr_fd:    [\033[0;32mOK\033[0m]\n\n");
+    }
+    else
+    {
+        printf("\nft_putnbr_fd:    [\033[0;31mKO\033[0m]\n\n");
+    }
+    
+    // Supprimer le fichier temporaire
+    unlink("test_putnbr.txt");
+}
 char to_upper(unsigned int i, char c)
 {
     (void)i;
@@ -383,10 +540,10 @@ int main()
 	test_ft_strlen();
 	test_ft_memset();
 	test_ft_bzero();
-	//test_ft_memcpy();
+	test_ft_memcpy();
 	//test_ft_memmove();
-	//test_ft_strlcpy();
-	//test_ft_strlcat();
+	test_ft_strlcpy();
+	test_ft_strlcat();
 	test_ft_toupper();
 	test_ft_tolower();
 	test_ft_strchr();
@@ -397,7 +554,7 @@ int main()
 	test_ft_strnstr();
 	test_ft_atoi();
 	
-	//test_ft_calloc();
+	test_ft_calloc();
 	test_ft_strdup();
 	
 	test_ft_substr();
@@ -410,7 +567,7 @@ int main()
 	test_ft_putchar_fd();
 	test_ft_putstr_fd();
 	test_ft_putendl_fd();
-	//test_ft_putnbr_fd();
+	test_ft_putnbr_fd();
 
 	//test_ft_lstnew();
 	//test_ft_lstadd_front();
