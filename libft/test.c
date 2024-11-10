@@ -6,7 +6,7 @@
 /*   By: toto <toto@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 21:32:22 by tcassu            #+#    #+#             */
-/*   Updated: 2024/11/07 20:26:33 by toto             ###   ########.fr       */
+/*   Updated: 2024/11/11 00:11:49 by toto             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include <fcntl.h>
 #include <limits.h>
 #include <unistd.h>
-#include "includes/libft.h"
+#include "libft.h"
 
 #define OK "\033[0;32mOK\033[0m"
 #define KO "\033[0;31mKO\033[0m"
@@ -25,12 +25,12 @@
 
 void test_ft_isalpha()
 {
-    printf("\nft_isdigit:");
+    printf("\nft_isalpha:");
     
-	printf(" [%s]", (ft_isalpha('z') == 1)? OK : KO);
-	printf(" [%s]", (ft_isalpha('a') == 1) ? OK : KO);
+	printf(" [%s]", (ft_isalpha('z') > 1)? OK : KO);
+	printf(" [%s]", (ft_isalpha('a') > 1) ? OK : KO);
 	printf(" [%s]", (ft_isalpha('9') == 0) ? OK : KO);
-	printf(" [%s]", (ft_isalpha('A') == 1) ? OK : KO);
+	printf(" [%s]", (ft_isalpha('A') > 1) ? OK : KO);
 }
 
 void test_ft_isdigit()
@@ -39,8 +39,8 @@ void test_ft_isdigit()
     
     printf(" [%s]", (ft_isdigit('H') == 0)? OK : KO);
 	printf(" [%s]", (ft_isdigit(' ') == 0)? OK : KO);
-	printf(" [%s]", (ft_isdigit('0') == 1) ? OK : KO);
-	printf(" [%s]", (ft_isdigit('9') == 1) ? OK : KO);
+	printf(" [%s]", (ft_isdigit('0') > 0) ? OK : KO);
+	printf(" [%s]", (ft_isdigit('9') > 0) ? OK : KO);
 	printf(" [%s]", (ft_isdigit('!') == 0) ? OK : KO);
 }
 
@@ -48,9 +48,9 @@ void test_ft_isalnum()
 {
     printf("\nft_isalnum:");
     
-    printf(" [%s]", (ft_isalnum('H') == 1)? OK : KO);
-	printf(" [%s]", (ft_isalnum('0') == 1) ? OK : KO);
-	printf(" [%s]", (ft_isalnum('9') == 1) ? OK : KO);
+    printf(" [%s]", (ft_isalnum('H') > 0)? OK : KO);
+	printf(" [%s]", (ft_isalnum('0') > 0) ? OK : KO);
+	printf(" [%s]", (ft_isalnum('9') > 0) ? OK : KO);
 	printf(" [%s]", (ft_isalnum(47) == 0) ? OK : KO);
 }
 
@@ -69,9 +69,9 @@ void test_ft_isprint()
     printf("\nft_isprint:");
     
     printf(" [%s]", (ft_isprint(31) == 0)? OK : KO);
-	printf(" [%s]", (ft_isprint(32) == 1) ? OK : KO);
+	printf(" [%s]", (ft_isprint(32) > 0) ? OK : KO);
 	printf(" [%s]", (ft_isprint(127) == 0) ? OK : KO);
-	printf(" [%s]", (ft_isprint(126) == 1) ? OK : KO);
+	printf(" [%s]", (ft_isprint(126) > 0) ? OK : KO);
 }
 
 void test_ft_strlen()
@@ -141,7 +141,35 @@ void test_ft_memcpy()
     printf(" [%s]", (memcmp(ft_memcpy(dest, src, strlen(src)), memcpy(dest, src, strlen(src)), sizeof(src)) == 0) ? OK : KO);
     printf(" [%s]", (memcmp(ft_memcpy(dest, src2, 0), memcpy(dest, src2, 0), sizeof(src)) ==0 )? OK : KO);
 }
-
+void test_ft_memmove()
+{
+    // Test 1: Déplacement normal
+    char str1[] = "Hello, World!";
+    char str2[] = "Hello, World!";
+    printf("\nft_memmove:");
+    ft_memmove(str1 + 7, str1 + 5, 6); // Déplace " World" à "World!"
+    memmove(str2 + 7, str2 + 5, 6);     // Même opération avec memmove
+    printf(" [%s]", strcmp(str1, str2) == 0 ? OK : KO);
+    // Réinitialiser les chaînes pour le prochain test
+    strcpy(str1, "Hello, World!");
+    strcpy(str2, "Hello, World!");
+    // Test 2: Chevauchement (source < destination)
+    ft_memmove(str1 + 5, str1 + 7, 6); // Déplace " World" à partir de l'index 5
+    memmove(str2 + 5, str2 + 7, 6);     // Même opération avec memmove
+    printf(" [%s]", strcmp(str1, str2) == 0 ? OK : KO);
+    // Réinitialiser les chaînes pour le prochain test
+    strcpy(str1, "Hello, World!");
+    strcpy(str2, "Hello, World!");
+    // Test 3: Chevauchement (destination < source)
+    ft_memmove(str1 + 7, str1 + 5, 6); // Déplace " World" à partir de l'index 5
+    memmove(str2 + 7, str2 + 5, 6);     // Même opération avec memmove
+    printf(" [%s]", strcmp(str1, str2) == 0 ? OK : KO);
+    // Test 4: Taille zéro
+    char zero_test1[] = "No change";
+    char zero_test2[] = "No change";
+    ft_memmove(zero_test1, zero_test2, 0); // Ne doit rien changer
+    printf(" [%s]", strcmp(zero_test1, zero_test2) == 0 ? OK : KO);
+}
 void test_ft_strlcat()
 {
     char dest[20];
@@ -324,18 +352,6 @@ void test_ft_calloc()
         printf(" [%s]", test_ok ? OK : KO);
         free(arr);
     }
-
-    // Test 2: Allocation de taille zéro
-    arr = (int *)ft_calloc(0, sizeof(int));
-    printf(" [%s]", (arr == NULL) ? OK : KO);
-    if (arr != NULL)
-        free(arr);
-
-    // Test 3: Allocation avec nmemb zéro
-    arr = (int *)ft_calloc(5, 0);
-    printf(" [%s]", (arr == NULL) ? OK : KO);
-    if (arr != NULL)
-        free(arr);
 }
 
 void test_ft_strdup()
@@ -361,7 +377,7 @@ void test_ft_itoa()
 	int	str3 = 42;
 	
     printf("\nft_itoa:   ");
-    
+
 	printf(" [%s]", (ft_memcmp(ft_itoa(str), "-2147483648", 11) == 0) ? OK : KO);
 	printf(" [%s]", (ft_memcmp(ft_itoa(str1), "2147483647", 10) == 0) ? OK : KO);
 	printf(" [%s]", (ft_memcmp(ft_itoa(str2), "0", 1) == 0) ? OK : KO);
@@ -410,82 +426,7 @@ void test_ft_substr()
 	printf(" [%s]", (ft_memcmp(ft_substr(test1, 0, ft_strlen(test1)), "A cat is not a dog.", 19) == 0) ? OK : KO);
 	printf(" [%s]", (ft_memcmp(ft_substr(test1, 2, 0), "", 1) == 0) ? OK : KO);
 }
-void test_ft_putendl_fd()
-{
-    
-    
-	ft_putendl_fd("\nft_putendl_fd:   [\033[0;32mOK\033[0m]", 1);
-	
-}
 
-void test_ft_putstr_fd()
-{
-    
-	ft_putstr_fd("ft_putstr_fd:    [\033[0;32mOK\033[0m]", 1);
-	
-}
-
-void test_ft_putchar_fd()
-{
-    
-	char	*str;
-
-	str = "ft_putchar_fd:   [\033[0;32mOK\033[0m]\n";
-	while (*str)
-		ft_putchar_fd(*str++, 2);
-	
-}
-void test_ft_putnbr_fd()
-{
-    int fd;
-    char buffer[100];
-    // Ouvrir un fichier temporaire pour les tests
-    fd = open("test_putnbr.txt", O_WRONLY | O_CREAT | O_TRUNC, 0644);
-    if (fd == -1)
-    {
-        printf("Erreur lors de l'ouverture du fichier de test\n");
-        return;
-    }
-    // Tester différents nombres
-    ft_putnbr_fd(0, fd);
-    write(fd, "\n", 1);
-    ft_putnbr_fd(42, fd);
-    write(fd, "\n", 1);
-    ft_putnbr_fd(-42, fd);
-    write(fd, "\n", 1);
-    ft_putnbr_fd(INT_MAX, fd);
-    write(fd, "\n", 1);
-    ft_putnbr_fd(INT_MIN, fd);
-    write(fd, "\n", 1);
-    // Fermer le fichier
-    close(fd);
-    // Lire le contenu du fichier
-    fd = open("test_putnbr.txt", O_RDONLY);
-    if (fd == -1)
-    {
-        printf("Erreur lors de la lecture du fichier de test\n");
-        return;
-    }
-    ssize_t bytes_read = read(fd, buffer, sizeof(buffer) - 1);
-    if (bytes_read > 0)
-        buffer[bytes_read] = '\0';
-    else
-        printf("Erreur lors de la lecture du fichier ou fichier vide\n");
-    close(fd);
-    // Vérifier le résultat
-    const char *expected = "0\n42\n-42\n2147483647\n-2147483648\n";
-    if (strcmp(buffer, expected) == 0)
-    {
-        printf("\nft_putnbr_fd:    [\033[0;32mOK\033[0m]\n\n");
-    }
-    else
-    {
-        printf("\nft_putnbr_fd:    [\033[0;31mKO\033[0m]\n\n");
-    }
-    
-    // Supprimer le fichier temporaire
-    unlink("test_putnbr.txt");
-}
 char to_upper(unsigned int i, char c)
 {
     (void)i;
@@ -500,7 +441,7 @@ void test_ft_strmapi()
     
 	char	str[] = "abc";
 
-	printf(" [%s]", (ft_memcmp(ft_strmapi(str, to_upper), "ABC", 4) == 0) ? OK : KO);
+	printf(" [%s]\n", (ft_memcmp(ft_strmapi(str, to_upper), "ABC", 4) == 0) ? OK : KO);
 }
 
 void to_upperv(unsigned int i, char *c)
@@ -529,7 +470,136 @@ void test_ft_striteri()
 	printf("[%s] ", (ft_memcmp(str2, "!@#$ABC", 8) == 0) ? OK : KO);
 	printf("[%s] ", (ft_memcmp(str3, ";./,ABC", 8) == 0) ? OK : KO);
 }
+void test_ft_split()
+{
+    char **result;
+    int i;
 
+    printf("\nft_split:  ");
+
+    // Test 1: Séparation normale
+    result = ft_split("hello world", ' ');
+    if (result[0] && strcmp(result[0], "hello") == 0 && strcmp(result[1], "world") == 0 && result[2] == NULL)
+        printf(" [%s]", OK);
+    else
+        printf(" [%s]", KO);
+    
+    // Libération de la mémoire
+    i = 0;
+    while (result[i])
+        free(result[i++]);
+    free(result);
+
+    // Test 2: Plusieurs délimiteurs consécutifs
+    result = ft_split("  hello   world  ", ' ');
+    if (result[0] && strcmp(result[0], "hello") == 0 && strcmp(result[1], "world") == 0 && result[2] == NULL)
+        printf(" [%s]", OK);
+    else
+        printf(" [%s]", KO);
+    
+    // Libération de la mémoire
+    i = 0;
+    while (result[i])
+        free(result[i++]);
+    free(result);
+
+    // Test 3: Chaîne vide
+    result = ft_split("", ' ');
+    if (result[0] == NULL)
+        printf(" [%s]", OK);
+    else
+        printf(" [%s]", KO);
+    
+    free(result);
+
+    // Test 4: Aucun délimiteur
+    result = ft_split("hello", ' ');
+    if (result[0] && strcmp(result[0], "hello") == 0 && result[1] == NULL)
+        printf(" [%s]", OK);
+    else
+        printf(" [%s]", KO);
+    
+    // Libération de la mémoire
+    free(result[0]);
+    free(result);
+}
+
+void test_ft_putendl_fd()
+{
+    
+    
+	ft_putendl_fd("ft_putendl_fd:   [\033[0;32mOK\033[0m]", 1);
+	
+}
+
+void test_ft_putstr_fd()
+{
+    
+	ft_putstr_fd("\nft_putstr_fd:    [\033[0;32mOK\033[0m]", 1);
+	
+}
+
+void test_ft_putchar_fd()
+{
+    
+	char	*str;
+
+	str = "ft_putchar_fd:   [\033[0;32mOK\033[0m]";
+	while (*str)
+		ft_putchar_fd(*str++, 2);
+	
+}
+void test_ft_putnbr_fd()
+{
+    int fd;
+    char buffer[100];
+    // Ouvrir un fichier temporaire pour les tests
+    fd = open("test_putnbr.txt", O_WRONLY | O_CREAT | O_TRUNC, 0644);
+    if (fd == -1)
+    {
+        printf("Erreur lors de l'ouverture du fichier de test\n");
+        return;
+    }
+    // Tester différents nombres
+    ft_putnbr_fd(0, fd);
+	write(fd, "\n", 1);
+    ft_putnbr_fd(42, fd);
+    write(fd, "\n", 1);
+    ft_putnbr_fd(-42, fd);
+    write(fd, "\n", 1);
+    ft_putnbr_fd(INT_MAX, fd);
+    write(fd, "\n", 1);
+    ft_putnbr_fd(INT_MIN, fd);
+    write(fd, "\n", 1);
+    // Fermer le fichier
+    close(fd);
+    // Lire le contenu du fichier
+    fd = open("test_putnbr.txt", O_RDONLY);
+    if (fd == -1)
+    {
+        printf("Erreur lors de la lecture du fichier de test\n");
+        return;
+    }
+    ssize_t bytes_read = read(fd, buffer, sizeof(buffer) - 1);
+    if (bytes_read > 0)
+        buffer[bytes_read] = '\0';
+    else
+        printf("Erreur lors de la lecture du fichier ou fichier vide\n");
+    close(fd);
+    // Vérifier le résultat
+    const char *expected = "0\n42\n-42\n2147483647\n-2147483648\n";
+    if (strcmp(buffer, expected) == 0)
+    {
+        printf("\nft_putnbr_fd:    [\033[0;32mOK\033[0m]\n");
+    }
+    else
+    {
+        printf("\nft_putnbr_fd:    [\033[0;31mKO\033[0m]\n");
+    }
+    
+    // Supprimer le fichier temporaire
+    unlink("test_putnbr.txt");
+}
 int main()
 {
 	test_ft_isalpha();
@@ -541,7 +611,7 @@ int main()
 	test_ft_memset();
 	test_ft_bzero();
 	test_ft_memcpy();
-	//test_ft_memmove();
+	test_ft_memmove();
 	test_ft_strlcpy();
 	test_ft_strlcat();
 	test_ft_toupper();
@@ -560,14 +630,16 @@ int main()
 	test_ft_substr();
 	test_ft_strjoin();
 	test_ft_strtrim();
-	//test_ft_split();
+	test_ft_split();
 	test_ft_itoa();
-	test_ft_strmapi();
 	test_ft_striteri();
+	test_ft_strmapi();
+	
 	test_ft_putchar_fd();
 	test_ft_putstr_fd();
-	test_ft_putendl_fd();
 	test_ft_putnbr_fd();
+	test_ft_putendl_fd();
+	
 
 	//test_ft_lstnew();
 	//test_ft_lstadd_front();

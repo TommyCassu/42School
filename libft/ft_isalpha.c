@@ -1,32 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr.c                                        :+:      :+:    :+:   */
+/*   ft_isalpha.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: toto <toto@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/23 21:10:14 by toto              #+#    #+#             */
-/*   Updated: 2024/10/23 21:13:40 by toto             ###   ########.fr       */
+/*   Created: 2024/10/03 22:54:50 by marvin            #+#    #+#             */
+/*   Updated: 2024/11/10 21:05:02 by toto             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void ft_putnbr(int nb)
+int	ft_isalpha(int c)
 {
-    long nbr;
-    
-    nbr = nb;
-    if (nbr < 0)
-    {
-        ft_putchar('-');
-        nbr *= -1;
-    }
-    if (nbr > 9)
-    {
-        ft_putnbr(nbr / 10);
-        ft_putchar(nbr % 10 + '0');
-    }
-    else
-        ft_putchar(nbr + '0');
+	if ((c >= 65 && c <= 90) || (c >= 97 && c <= 122))
+		return (1024);
+	return (0);
 }

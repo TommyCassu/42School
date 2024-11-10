@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcassu <tcassu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: toto <toto@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 18:59:18 by toto              #+#    #+#             */
-/*   Updated: 2024/11/04 20:22:01 by tcassu           ###   ########.fr       */
+/*   Updated: 2024/11/10 22:16:45 by toto             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <stdlib.h>
 
-int	ft_countword(char *str)
+int	ft_countword(const char *str, char c)
 {
 	int	i;
 	int	inword;
@@ -24,10 +24,9 @@ int	ft_countword(char *str)
 	nbword = 0;
 	while (str[i] != '\0')
 	{
-		if (str[i] == ' ' || str[i] == '	' || str[i] == '\n')
+		if (str[i] == c)
 			inword = 0;
-		else if (str[i] != ' ' && str[i] != '	'
-			&& str[i] != '\n' && inword == 0)
+		else if (str[i] != c && inword == 0)
 		{
 			inword = 1;
 			nbword++;
@@ -37,7 +36,7 @@ int	ft_countword(char *str)
 	return (nbword);
 }
 
-char	*ft_strcpy(char *src, char *dest, int debut, int fin)
+char	*ft_strcpy(const char *src, char *dest, int debut, int fin)
 {
 	int	i;
 
@@ -52,7 +51,7 @@ char	*ft_strcpy(char *src, char *dest, int debut, int fin)
 	return (dest);
 }
 
-void	ft_set_string(char *str, char **result)
+void	ft_set_string(const char *str, char **result, char c)
 {
 	int		i;
 	int		debut;
@@ -64,14 +63,13 @@ void	ft_set_string(char *str, char **result)
 	actualword = 0;
 	while (str[i] != '\0')
 	{
-		while (str[i] == ' ' || str[i] == '	' || str[i] == '\n')
+		while (str[i] == c)
 			i++;
 		debut = i;
-		while (str[i] != ' ' && str[i] != '	' && str[i] != '\n'
-			&& str[i] != '\0')
+		while (str[i] != c && str[i] != '\0')
 			i++;
 		fin = i - 1;
-		if (actualword < ft_countword(str))
+		if (actualword < ft_countword(str, c))
 		{
 			word = (char *)malloc(sizeof(char) * (fin - debut + 1) + 1);
 			result[actualword] = ft_strcpy(str, word, debut, fin);
@@ -81,12 +79,12 @@ void	ft_set_string(char *str, char **result)
 	result[actualword] = 0;
 }
 
-char	**ft_split(char *str)
+char	**ft_split(char const *str, char c)
 {
 	char	**result;
 
-	result = (char **)malloc(sizeof(char *) * (ft_countword(str) + 1));
-	ft_set_string(str, result);
+	result = (char **)malloc(sizeof(char *) * (ft_countword(str, c) + 1));
+	ft_set_string(str, result, c);
 	return (result);
 }
 /*
