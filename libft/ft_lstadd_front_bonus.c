@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstadd_front_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcassu <tcassu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: toto <toto@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 11:33:49 by tcassu            #+#    #+#             */
-/*   Updated: 2024/11/06 17:01:33 by tcassu           ###   ########.fr       */
+/*   Updated: 2024/11/11 00:43:41 by toto             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	ft_lstadd_front(t_list **lst, t_list *new)
 	{
 		*lst = new;
 		return ;
-	}	
+	}
 	new->next = tmp;
 	*lst = new;
 }

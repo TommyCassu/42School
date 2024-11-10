@@ -6,7 +6,7 @@
 /*   By: toto <toto@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 23:25:46 by marvin            #+#    #+#             */
-/*   Updated: 2024/11/10 23:03:42 by toto             ###   ########.fr       */
+/*   Updated: 2024/11/11 00:39:16 by toto             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ size_t	ft_strlcat(char *dst, const char *src, size_t size)
 {
 	size_t	sizedst;
 	size_t	sizesrc;
-	size_t i;
+	size_t	i;
 
 	sizedst = ft_strlen(dst);
 	sizesrc = ft_strlen(src);

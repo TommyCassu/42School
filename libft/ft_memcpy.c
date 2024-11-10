@@ -6,7 +6,7 @@
 /*   By: toto <toto@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 00:53:02 by marvin            #+#    #+#             */
-/*   Updated: 2024/11/10 23:06:51 by toto             ###   ########.fr       */
+/*   Updated: 2024/11/11 00:42:06 by toto             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 	i = 0;
 	if (!dest && !src)
 		return (NULL);
-	if (n  > 0)
+	if (n > 0)
 	{
 		while (i < n)
 		{
