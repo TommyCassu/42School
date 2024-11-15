@@ -6,7 +6,7 @@
 /*   By: toto <toto@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 18:59:18 by toto              #+#    #+#             */
-/*   Updated: 2024/11/10 22:16:45 by toto             ###   ########.fr       */
+/*   Updated: 2024/11/15 02:29:27 by toto             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,21 +87,3 @@ char	**ft_split(char const *str, char c)
 	ft_set_string(str, result, c);
 	return (result);
 }
-/*
-int	main(void)
-{
-	char	str[] = " toto va al plage a    ";
-    
-    char **result;
-    result = ft_split(str);
-    int i;
-    i = 0;
-    while(result[i] != 0)
-    {
-        printf("[%s]\n", result[i]);
-        free(result[i]);
-        i++;
-    }
-    free(result);
-}
-*/
