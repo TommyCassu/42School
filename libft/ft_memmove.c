@@ -6,7 +6,7 @@
 /*   By: toto <toto@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 12:51:52 by toto              #+#    #+#             */
-/*   Updated: 2024/11/15 01:14:55 by toto             ###   ########.fr       */
+/*   Updated: 2024/11/22 22:54:11 by toto             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	*ft_memmove(void *dest, const void *src, size_t n)
 	size_t	i;
 
 	i = 0;
+	if (dest == NULL && src == NULL)
+		return (NULL);
 	if ((size_t)dest < (size_t)src)
 	{
 		while (i < n)

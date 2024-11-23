@@ -6,7 +6,7 @@
 /*   By: toto <toto@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 17:37:22 by toto              #+#    #+#             */
-/*   Updated: 2024/11/15 02:28:24 by toto             ###   ########.fr       */
+/*   Updated: 2024/11/23 01:00:10 by toto             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ char	*ft_strnstr(const char *big, const char *little, size_t len)
 	size_t	j;
 
 	i = 0;
+	if (big == NULL)
+		return (NULL);
 	if (*little == '\0')
 		return ((char *)big);
 	sizelittle = ft_strlen(little);
