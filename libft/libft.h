@@ -6,14 +6,13 @@
 /*   By: toto <toto@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 20:38:25 by tcassu            #+#    #+#             */
-/*   Updated: 2024/11/22 23:00:23 by toto             ###   ########.fr       */
+/*   Updated: 2024/11/25 20:04:37 by toto             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
-# include <string.h>
 # include <stdlib.h>
 # include <unistd.h>
 
